@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap">
+  <title>Happy Birthday Card</title>
+  <style>
+    * {
+      transition: all 0.3s ease-in-out;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(to right, #45B649, #DCE35B);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      font-family: 'Open Sans', sans-serif;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .container {
+      text-align: center;
+      position: relative;
+      z-index: 10;
+    }
+
+    .btn {
+      background-color: #12192c;
+      color: #DCE35B;
+      border: none;
+      padding: 15px 30px;
+      font-size: 18px;
+      cursor: pointer;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+      animation: pulse 1.5s infinite;
+    }
+
+    .btn:hover {
+      background-color: #1e2a47;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+
+    .card {
+      background: #ADD8E6;
+      border-radius: 30px;
+      width: 80vw;
+      max-width: 600px;
+      padding: 20px;
+      color: #12192c;
+      text-align: justify;
+      opacity: 0;
+      transform: scale(0.8);
+      transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+      display: none;
+      position: relative;
+      z-index: 10;
+    }
+
+    .card img {
+      max-width: 100%;
+      border-radius: 20px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    }
+
+    .card.show {
+      display: block;
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .confetti, .balloon {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      opacity: 0.7;
+      animation: float-up linear infinite;
+    }
+
+    @keyframes float-up {
+      0% { transform: translateY(100vh) scale(1); }
+      100% { transform: translateY(-10vh) scale(1.5); }
+    }
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <button class="btn" onclick="showCard()">Klik untuk melihat kartu</button>
+    <div class="card" id="birthdayCard">
+      <img src="https://cdn.pixabay.com/photo/2020/10/06/21/54/cake-5633461__480.png" alt="birthday cake">
+      <h1 style="text-align: center;">Happy Birthday!</h1>
+      <p>Selamat ulang tahun! 🎉 Semoga di umur baru ini, semua langkahmu makin mantap 🚀, semua mimpimu makin dekat ✨, dan semua kebahagiaan selalu berpihak padamu 🎂. Tetap jadi diri sendiri yang keren 💫, luar biasa 🔥, dan tetap jadi orang hebat seperti yang gue kenal! 💪🏼🎈</p>
+      <p>Oh iya, terima kasih sudah terus berjuang sampai sejauh ini. Gw tau nggak selalu gampang, tapi lu tetap kuat dan keren banget. Semoga ke depannya makin banyak hal baik yang datang buat lo! 🚀🙌🏻</p>
+      <p>Happy birthday!🌟🥂</p>
+    </div>
+  </div>
+
+  <audio id="birthdayAudio" src="https://www.fesliyanstudios.com/play-mp3/387" preload="auto"></audio>
+
+  <script>
+    function showCard() {
+      document.getElementById('birthdayCard').classList.add('show');
+      document.getElementById('birthdayAudio').play();
+      generateConfetti();
+      generateBalloons();
+    }
+
+    function generateConfetti() {
+      for (let i = 0; i < 100; i++) {
+        let confetti = document.createElement('div');
+        confetti.classList.add('confetti');
+        confetti.style.left = Math.random() * 100 + 'vw';
+        confetti.style.animationDuration = (Math.random() * 3 + 2) + 's';
+        confetti.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 70%)`;
+        document.body.appendChild(confetti);
+
+        setTimeout(() => {
+          confetti.remove();
+        }, 5000);
+      }
+    }
+
+    function generateBalloons() {
+      for (let i = 0; i < 15; i++) {
+        let balloon = document.createElement('div');
+        balloon.classList.add('balloon');
+        balloon.style.left = Math.random() * 100 + 'vw';
+        balloon.style.animationDuration = (Math.random() * 4 + 3) + 's';
+        balloon.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
+        balloon.style.width = balloon.style.height = Math.random() * 30 + 20 + 'px';
+        document.body.appendChild(balloon);
+
+        setTimeout(() => {
+          balloon.remove();
+        }, 7000);
+      }
+    }
+  </script>
+</body>
+</html>

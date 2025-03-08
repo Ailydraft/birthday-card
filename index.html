@@ -12,16 +12,32 @@
     }
 
     body {
-      background: linear-gradient(to right, #45B649, #DCE35B);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-      font-family: 'Open Sans', sans-serif;
-      overflow: hidden;
-      position: relative;
-    }
+  background: linear-gradient(to right, #45B649, #DCE35B);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.card {
+  background: #ADD8E6;
+  border-radius: 30px;
+  width: 80vw;
+  max-width: 600px;
+  padding: 20px;
+  color: #12192c;
+  text-align: justify;
+  opacity: 0;
+  transform: scale(0.8);
+  transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+  display: none;
+  position: relative;
+  z-index: 10;
+  padding-bottom: 20px; /* Tambahkan padding bawah */
+}
+
 
     .container {
       text-align: center;
@@ -51,22 +67,7 @@
       100% { transform: scale(1); }
     }
 
-    .card {
-      background: #ADD8E6;
-      border-radius: 30px;
-      width: 80vw;
-      max-width: 600px;
-      padding: 20px;
-      color: #12192c;
-      text-align: justify;
-      opacity: 0;
-      transform: scale(0.8);
-      transition: opacity 1s ease-in-out, transform 1s ease-in-out;
-      display: none;
-      position: relative;
-      z-index: 10;
-    }
-
+    
     .card img {
       max-width: 100%;
       border-radius: 20px;
@@ -97,7 +98,7 @@
 </head>
 <body>
   <div class="container">
-    <button class="btn" onclick="showCard()">Klik untuk melihat kartu</button>
+    <button class="btn" onclick="showCard()" id="showCardBtn">Klik untuk melihat kartu</button>
     <div class="card" id="birthdayCard">
       <img src="https://cdn.pixabay.com/photo/2020/10/06/21/54/cake-5633461__480.png" alt="birthday cake">
       <h1 style="text-align: center;">Happy Birthday!</h1>
@@ -147,6 +148,20 @@
         }, 7000);
       }
     }
+
+    document.addEventListener("DOMContentLoaded", function () {
+    const button = document.getElementById("showCardBtn");
+    const card = document.querySelector(".card");
+
+    button.addEventListener("click", function () {
+        card.style.display = "block"; // Menampilkan kartu
+        card.style.opacity = "1"; 
+        card.style.transform = "scale(1)"; 
+
+        button.style.display = "none"; // Sembunyikan tombol setelah diklik
+    });
+});
+
   </script>
 </body>
 </html>
